@@ -31,7 +31,7 @@ public class Card {
 		
 		this.rank = rank;
 		this.suit = suit;
-		this.frontImageName = new ImageIcon(this.rankToString() + this.suitToString() + ".jpg");
+		this.frontImageName = new ImageIcon("src/img/" + (this.rankToString() + this.suitToString() + ".jpg"));
 	}
 	//Accessor Methods
 	public int getSuit() {

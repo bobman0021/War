@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 
 public class WarGame {
 	
@@ -21,33 +19,12 @@ public class WarGame {
 		}
 	}
 	
-	public void warCardPull() {
-		for(int i = 0; i < 3; i++) {
-			if(player1.deckSize() > 0) {
-				player1.addToWarPile(player1.pullCard());
-			}
-			if(player2.deckSize() > 0) {
-				player2.addToWarPile(player2.pullCard());
-			}
-		}
-	}
-	
 	public boolean isWar(){
 		return bWar;
 	}
 	
 	public void setWar(boolean bWar) {
 		this.bWar = bWar;
-	}
-	
-	public WarPlayer canWar() {
-		if(player1.deckSize() < 3) {
-			return player1;
-		} else if(player2.deckSize() < 3) {
-			return player2;
-		} else {
-			return null;
-		}
 	}
 	
 	public void gameOver() {

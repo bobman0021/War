@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -34,16 +33,16 @@ public class WarGameGUI extends JFrame {
 	public void addComponenetsToPane(final Container pane) {
 		final JPanel columnInfo = new JPanel();
 		columnInfo.setLayout(gameLayout);
-		columnInfo.add(new Label("My Deck"));
-		columnInfo.add(new Label("Your Card"));
-		columnInfo.add(new Label("Your Pile"));
-		columnInfo.add(new Label("Opponent Pile"));
-		columnInfo.add(new Label("Opponent Card"));
-		columnInfo.add(new Label("Opponent Deck"));
+		columnInfo.add(new JLabel("My Deck"));
+		columnInfo.add(new JLabel("Your Card"));
+		columnInfo.add(new JLabel("Your Pile"));
+		columnInfo.add(new JLabel("Opponent Pile"));
+		columnInfo.add(new JLabel("Opponent Card"));
+		columnInfo.add(new JLabel("Opponent Deck"));
 		pane.add(columnInfo, BorderLayout.NORTH);
 		
 		final JPanel gameInfo = new JPanel();
-		gameInfo.setLayout(new GridLayout(0,4));
+		gameInfo.setLayout(gameLayout);
 		gameInfo.add(plDeck);
 		gameInfo.add(playRound);
 		
@@ -76,6 +75,7 @@ public class WarGameGUI extends JFrame {
 						cardLabels[3].setIcon(image);
 						if(game.getPlayer(true).deckSize() > 0 && game.getPlayer(false).deckSize() > 0) {
 							rndResult.setText("War!!");
+							game.setWar(true);
 							game.roundPullCards(game.getPlayer(true), game.getPlayer(false));
 							cardLabels[2].setIcon(image);
 							cardLabels[3].setIcon(image);
@@ -107,63 +107,15 @@ public class WarGameGUI extends JFrame {
 						cardLabels[3].setIcon(null);
 					}
 				}
-				
-//				if(player1.deckSize() > 0 && player2.deckSize() > 0 && bGameOver == false) {
-//					player1.addToWarPile(player1.pullCard());
-//					player2.addToWarPile(player2.pullCard());
-//					
-//					cardLabels[1].setIcon(player1.getTopOfWarPile().getImage());
-//					cardLabels[4].setIcon(player2.getTopOfWarPile().getImage());
-//				} else if (player1.deckSize() == 0) {
-//					gameOver(player2);
-//				} else {
-//					gameOver(player1);
-//				}
-//				//////////////////////////////////////////////////////////////////////
-//				if(!bGameOver) {
-//					if(player1.getTopOfWarPile().compareTo(player2.getTopOfWarPile()) > 0) {
-//						player1.dumpWarPiles(player2);
-//						bWar = false;
-//						plDeck.setText("My Deck: " + player1.deckSize());
-//						opDeck.setText("Opponent Deck: " + player2.deckSize());
-//						rndResult.setText("You Win!");
-//					} else if(player1.getTopOfWarPile().compareTo(player2.getTopOfWarPile()) < 0) {
-//						player2.dumpWarPiles(player1);
-//						bWar = false;
-//						plDeck.setText("My Deck: " + player1.deckSize());
-//						opDeck.setText("Opponent Deck: " + player2.deckSize());
-//						rndResult.setText("Computer Wins!");
-//					} else {
-//						for(int i = 0; i < 3; i++) {
-//							if(player1.deckSize() > 0) {
-//								player1.addToWarPile(player1.pullCard());
-//								cardLabels[2].setIcon(image);
-//							} else {
-//								gameOver(player2);
-//							}
-//							if(player2.deckSize() > 0) {
-//								player2.addToWarPile(player2.pullCard());
-//								cardLabels[3].setIcon(image);
-//							} else {
-//								gameOver(player1);
-//							}
-//						}
-//						rndResult.setText("War!!");
-//						bWar = true;
-//					}
-//					if(!bWar) {
-//						cardLabels[2].setIcon(null);
-//						cardLabels[3].setIcon(null);
-//					}
-//					
-//					plDeck.setText("My Deck: " + player1.deckSize());
-//					opDeck.setText("Opponent Deck: " + player2.deckSize());
-//				}
 			}
 		});
 		
 		gameInfo.add(rndResult);
-		gameInfo.add(quit);		
+		gameInfo.add(new JLabel(""));
+		gameInfo.add(quit);	
+		plDeck.setHorizontalAlignment(JLabel.CENTER);
+		rndResult.setHorizontalAlignment(JLabel.RIGHT);
+		opDeck.setHorizontalAlignment(JLabel.CENTER);
 		quit.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
